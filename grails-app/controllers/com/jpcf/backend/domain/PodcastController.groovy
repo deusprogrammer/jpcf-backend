@@ -1,6 +1,7 @@
 package com.jpcf.backend.domain
 
 import org.springframework.dao.DataIntegrityViolationException
+import grails.converters.JSON
 
 class PodcastController {
 
@@ -11,8 +12,7 @@ class PodcastController {
     }
 
     def list(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        [podcastInstanceList: Podcast.list(params), podcastInstanceTotal: Podcast.count()]
+        render Podcast.list() as JSON
     }
 
     def create() {
@@ -103,7 +103,7 @@ class PodcastController {
     def get(Long id) {
         def podcast = Podcast.get(id)
         
-        if (image) {
+        if (podcast) {
             def file = new File(podcast.fileName) 
             response.setHeader("Content-Type", "binary/octet-stream") 
             response.setHeader("Content-Disposition", "attachment; filename=${file.getName()}") 

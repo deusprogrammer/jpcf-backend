@@ -1,0 +1,23 @@
+/* 
+    Document   : config
+    Created on : Nov 4, 2012, 6:23:30 PM
+    Author     : mmain
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+div.ident {
+    position:relative;
+    left:10px;
+    padding-top:10px;
+    
+    display:inline-block;
+}
+
+img.thumbnail {
+    width:  100px;
+}
+
+td.td-input {
+   background: lightgreen;
+}

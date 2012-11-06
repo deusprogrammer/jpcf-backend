@@ -10,10 +10,6 @@ class EventController {
     def index() {
         redirect(action: "list")
     }
-    
-    def list() {
-        render Event.list() as JSON
-    }
 
     def create() {
         [eventInstance: new Event(params)]

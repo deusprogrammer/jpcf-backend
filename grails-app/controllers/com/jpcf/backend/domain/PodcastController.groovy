@@ -5,7 +5,7 @@ import grails.converters.JSON
 
 class PodcastController {
 
-    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+    static allowedMethods = [save: "POST", update: "POST"]
 
     def index() {
         redirect(action: "list", params: params)
@@ -49,7 +49,7 @@ class PodcastController {
             return
         }
 
-        [podcastInstance: podcastInstance]
+        [podcast: podcastInstance]
     }
 
     def update(Long id, Long version) {
@@ -78,25 +78,35 @@ class PodcastController {
         }
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'podcast.label', default: 'Podcast'), podcastInstance.id])
-        redirect(action: "show", id: podcastInstance.id)
+        redirect(controller: "configuration", action: "index", id: podcastInstance.id)
     }
 
     def delete(Long id) {
         def podcastInstance = Podcast.get(id)
         if (!podcastInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'podcast.label', default: 'Podcast'), id])
-            redirect(action: "list")
+            redirect(controller: "configuration", action: "index")
             return
         }
+
+        /*
+        println "DELETING ${podcastInstance.fileName}"
+        def file = new File(podcastInstance.fileName)
+        if (!file.delete()) {
+            flash.message = "Unable to delete file from hard drive"
+            redirect(controller: "configuration", action: "index")  
+            return
+        }
+        */
 
         try {
             podcastInstance.delete(flush: true)
             flash.message = message(code: 'default.deleted.message', args: [message(code: 'podcast.label', default: 'Podcast'), id])
-            redirect(action: "list")
+            redirect(controller: "configuration", action: "index")
         }
         catch (DataIntegrityViolationException e) {
             flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'podcast.label', default: 'Podcast'), id])
-            redirect(action: "show", id: id)
+            redirect(controller: "configuration", action: "index")
         }
     }
     

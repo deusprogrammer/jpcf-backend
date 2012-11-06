@@ -10,11 +10,12 @@ class FileUploadController {
     
     def uploadPodcast = {
         println "IN upload()"
+        def podcast
         
         def f = request.getFile('podcastUpload')
         if(!f.empty) {
             //def image = new SlideShowImage(orderIndex: SlideShowImageService.getNextOrderIndex())
-            def podcast = new Podcast()
+            podcast = new Podcast()
             
             def filename = f.getOriginalFilename()
             def extension = filename[filename.lastIndexOf(".")..filename.size() - 1]
@@ -33,9 +34,11 @@ class FileUploadController {
         }    
         else {
             flash.message = 'File cannot be empty!'
+            redirect(controller: "configuration", action: "index")
+            return
         }
         
-        redirect(controller: "configuration", action: "index")
+        redirect(controller: "podcast", action: "edit", id: podcast.id)
     }
 
     def uploadImage = {

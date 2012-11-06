@@ -21,6 +21,34 @@ class SlideShowImageController {
             
         }
     }
+    
+    def delete(Long id) {
+        def image = SlideShowImage.get(id)
+        
+        if (!image) {
+            flash.message = "Unable to find image"
+            redirect(controller: "configuration", action: "index")
+            return
+        }
+        
+        /*
+        println "DELETING ${image.fileName}"
+        def file = new File(image.fileName)
+        if (!file.delete()) {
+            flash.message = "Unable to delete file from hard drive"
+            redirect(controller: "configuration", action: "index")  
+            return
+        }
+        */
+        
+        if (!image.delete()) {
+            flash.message = "Unable to delete file from database"
+            redirect(controller: "configuration", action: "index")
+            return
+        }
+        
+        redirect(controller: "configuration", action: "index")
+    }
 
     def list() {
         render SlideShowImage.list() as JSON
@@ -35,7 +63,7 @@ class SlideShowImageController {
         render urls as JSON
     }
     
-    def delete(Long id) {
+    def deleteJS(Long id) {
         def ret = [status: "success"]
         def image = SlideImage.get(id)
         

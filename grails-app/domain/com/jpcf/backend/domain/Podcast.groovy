@@ -1,8 +1,8 @@
 package com.jpcf.backend.domain
 
 class Podcast {
-    String name
-    String description
+    String name = ""
+    String description = ""
     String fileName
     Date dateCreated
 

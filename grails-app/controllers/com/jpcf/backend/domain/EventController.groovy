@@ -5,7 +5,7 @@ import grails.converters.JSON
 
 class EventController {
 
-    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+    static allowedMethods = [save: "POST", update: "POST"]
 
     def index() {
         redirect(action: "list")
@@ -57,7 +57,7 @@ class EventController {
         def eventInstance = Event.get(id)
         if (!eventInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'event.label', default: 'Event'), id])
-            redirect(action: "list")
+            redirect(controller: "configuration", action: "index")
             return
         }
 
@@ -79,25 +79,25 @@ class EventController {
         }
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'event.label', default: 'Event'), eventInstance.id])
-        redirect(action: "show", id: eventInstance.id)
+        redirect(controller: "configuration", action: "index")
     }
 
     def delete(Long id) {
         def eventInstance = Event.get(id)
         if (!eventInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'event.label', default: 'Event'), id])
-            redirect(action: "list")
+            redirect(controller: "configuration", action: "index")
             return
         }
 
         try {
             eventInstance.delete(flush: true)
             flash.message = message(code: 'default.deleted.message', args: [message(code: 'event.label', default: 'Event'), id])
-            redirect(action: "list")
+            redirect(controller: "configuration", action: "index")
         }
         catch (DataIntegrityViolationException e) {
             flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'event.label', default: 'Event'), id])
-            redirect(action: "show", id: id)
+            redirect(controller: "configuration", action: "index")
         }
     }
 }

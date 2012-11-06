@@ -46,6 +46,9 @@
   </head>
   <body>
     <h1>Configuration Utility</h1>
+      <g:if test="${flash.message}">
+        <div class="message" role="status">${flash.message}</div>
+      </g:if>
     <hr />
     <h3>Slide Show</h3>
     <table>
@@ -62,7 +65,21 @@
             <tr>
               <td><img class="thumbnail" src="${createLink(controller: 'slideShowImage', action: 'get', id: image.id)}" /></td>
               <td>${image.orderIndex}</td>
-              <td><g:if test="${i != 0}"><button class="move-down-button" data-ImageId="${image.id}">Move Up</button></g:if><g:else><button class="move-down-button" data-ImageId="${image.id}" disabled>Move Up</button></g:else><g:if test="${i != nImages - 1}"><button class="move-up-button" data-ImageId="${image.id}">Move Down</button></g:if><g:else><button class="move-up-button" data-ImageId="${image.id}" disabled>Move Down</button></g:else><button class="delete-img-button" data-ImageId="${image.id}">Delete</button></td>
+              <td>
+                <g:if test="${i != 0}">
+                  <button class="move-down-button" data-ImageId="${image.id}">Move Up</button>
+                </g:if>
+                <g:else>
+                  <button class="move-down-button" data-ImageId="${image.id}" disabled>Move Up</button>
+                </g:else>
+                <g:if test="${i != nImages - 1}">
+                  <button class="move-up-button" data-ImageId="${image.id}">Move Down</button>
+                </g:if>
+                <g:else>
+                  <button class="move-up-button" data-ImageId="${image.id}" disabled>Move Down</button>
+                </g:else>
+                <g:link controller="slideShowImage" action="delete" id="${image.id}"><button class="delete-img-button">Delete</button></g:link>
+              </td>
             </tr>
           </g:each>
         </g:if>
@@ -90,10 +107,10 @@
         <g:if test="${podcasts}">
           <g:each in="${podcasts}" var="podcast" status="i">
             <tr>
-              <td>${podcast.fileName}</td>
-              <td></td>
+              <td>${podcast.name}</td>
+              <td>${podcast.description}</td>
               <td>${podcast.dateCreated}</td>
-              <td><button>Edit</button><button>Delete</button></td>
+              <td><g:link controller="podcast" action="edit" id="${podcast.id}"><button>Edit</button></g:link><g:link controller="podcast" action="delete" id="${podcast.id}"><button>Delete</button></g:link></td>
             </tr>
           </g:each>
         </g:if>
@@ -127,7 +144,7 @@
               <td>${event.description}</td>
               <td>${event.startDate}</td>
               <td>${event.endDate}</td>
-              <td><button class="jpcf-edit-button" data-eventId="${event.id}">Edit</button><button class="jpcf-delete-button" data-eventId="${event.id}">Delete</button></td>
+              <td><g:link controller="event" action="edit" id="${event.id}"><button class="jpcf-edit-button" data-eventId="${event.id}">Edit</button></g:link><g:link controller="event" action="delete" id="${event.id}"><button class="jpcf-delete-button">Delete</button></g:link></td>
             </tr>
           </g:each>
         </g:if>

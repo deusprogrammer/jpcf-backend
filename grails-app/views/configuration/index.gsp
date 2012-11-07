@@ -63,7 +63,7 @@
         <g:if test="${images}">
           <g:each in="${images}" var="image" status="i">
             <tr>
-              <td><img class="thumbnail" src="${createLink(controller: 'slideShowImage', action: 'get', id: image.id)}" /></td>
+              <td><img class="thumbnail" src="${createLink(controller: 'JS', action: 'getImageJs', id: image.id)}" /></td>
               <td>${image.orderIndex}</td>
               <td>
                 <g:if test="${i != 0}">

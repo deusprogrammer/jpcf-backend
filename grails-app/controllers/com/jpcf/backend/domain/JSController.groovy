@@ -10,7 +10,9 @@ class JSController {
     def listPodcastsJs(Integer max) {
         def list = Podcast.list().collect {[url: createLink(action: "getPodcastJs", id: it.id), name: it.name, description: it.description]}
         
-        render list() as JSON
+        println "LIST: ${list}"
+        
+        render list as JSON
     }
 
     def getPodcastJs(Long id) {
@@ -29,15 +31,17 @@ class JSController {
         }
     }    
     
-    def listImagesJS() {
+    def listImagesJs() {
         render SlideShowImage.list() as JSON
     }
     
-    def listImageUrlsJS() {
+    def listImageUrlsJs() {
         def urls = []
         SlideShowImage.list().each {image ->
             urls += createLink(action: "getImageJs", id: image.id)
         }
+        
+        println "URLS: ${urls}"
         
         render urls as JSON
     }

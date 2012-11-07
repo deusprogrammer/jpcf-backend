@@ -1,8 +1,8 @@
 dataSource {
     pooled = true
-    driverClassName = "org.h2.Driver"
-    username = "sa"
-    password = ""
+    //driverClassName = "org.h2.Driver"
+    driverClassName = "com.mysql.jdbc.Driver"
+    //dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
 }
 hibernate {
     cache.use_second_level_cache = true
@@ -26,7 +26,11 @@ environments {
     production {
         dataSource {
             dbCreate = "update"
-            url = "jdbc:h2:prodDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
+            url = "jdbc:mysql://192.168.1.108/jpcf?useUnicode=yes&characterEncoding=UTF-8"
+            username = "prod"
+            password = "sethR4chan"
+            //url = "jdbc:h2:prodDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
+            /*
             pooled = true
             properties {
                maxActive = -1
@@ -38,6 +42,7 @@ environments {
                testOnReturn=true
                validationQuery="SELECT 1"
             }
+            */
         }
     }
 }

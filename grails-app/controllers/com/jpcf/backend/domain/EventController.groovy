@@ -2,6 +2,8 @@ package com.jpcf.backend.domain
 
 import org.springframework.dao.DataIntegrityViolationException
 import grails.converters.JSON
+import java.text.ParseException
+import java.text.SimpleDateFormat
 
 class EventController {
 
@@ -16,15 +18,37 @@ class EventController {
     }
 
     def save() {
+		SimpleDateFormat formatter = new SimpleDateFormat("M/d/yyyy h:m a")
+		def startDate
+		def endDate
+		
+		try {
+			startDate = formatter.parse(params.startDate)
+			endDate = formatter.parse(params.endDate)
+		} catch (ParseException e) {
+			flash.message = "Start and end date must be in format MM/dd/yyyy H:m(pm|am)!"
+			redirect(controller: "configuration", action: "index")
+			return
+		}
+		
+		if (!startDate || !endDate) {
+			flash.message = "Start and end date must be in format MM/dd/yyyy H:m(pm|am)!"
+			redirect(controller: "configuration", action: "index")
+			return
+		}
+		
+		params.startDate = startDate
+		params.endDate = endDate
+		
         def eventInstance = new Event(params)
         if (!eventInstance.save(flush: true)) {
             flash.message = "Unable to save edit!"
-            redirect(controller: "configuration", action: "index", id: eventInstance.id)    
+            redirect(controller: "configuration", action: "index")    
             return
         }
 
         flash.message = message(code: 'default.created.message', args: [message(code: 'event.label', default: 'Event'), eventInstance.id])
-        redirect(controller: "configuration", action: "index", id: eventInstance.id)
+        redirect(controller: "configuration", action: "index")
     }
 
     def show(Long id) {

@@ -106,22 +106,10 @@
       <tbody>
         <g:if test="${podcasts}">
           <g:each in="${podcasts}" var="podcast" status="i">
-            <tr>
-              <td>${podcast.name}</td>
-              <td>${podcast.description}</td>
-              <td>${podcast.dateCreated}</td>
-              <td><g:link controller="podcast" action="edit" id="${podcast.id}"><button>Edit</button></g:link><g:link controller="podcast" action="delete" id="${podcast.id}"><button>Delete</button></g:link></td>
-            </tr>
+			<g:render template="/podcast/podcast" model="${[podcast: podcast]}" />
           </g:each>
         </g:if>
-        <g:form controller="fileUpload" action="uploadPodcast" method="post" enctype="multipart/form-data">
-        <tr class="tr-input">
-          <td></td>
-          <td></td>
-          <td><input type="file" id="fileUpload" name="podcastUpload" /></td>
-          <td><g:actionSubmit class="upload" value="Upload Podcast" action="uploadPodcast" /></td>
-        </tr>
-        </g:form>
+		<g:render template="/podcast/inlineForm" />
       </tbody>
     </table>
     <hr />
@@ -139,24 +127,10 @@
       <tbody>
         <g:if test="${events}">
           <g:each in="${events}" var="event">
-            <tr>
-              <td>${event.name}</td>
-              <td>${event.description}</td>
-              <td>${event.startDate}</td>
-              <td>${event.endDate}</td>
-              <td><g:link controller="event" action="edit" id="${event.id}"><button class="jpcf-edit-button" data-eventId="${event.id}">Edit</button></g:link><g:link controller="event" action="delete" id="${event.id}"><button class="jpcf-delete-button">Delete</button></g:link></td>
-            </tr>
+			<g:render template="/event/event" model="${[event: event]}" />
           </g:each>
         </g:if>
-        <g:form controller="event" action="save">
-        <tr class="tr-input">
-          <td><input type="text" name="name" id="event-name" /></td>
-          <td><input type="text" name="description" id="event-desc" /></td>
-          <td><g:datePicker name="startDate" id="event-start" value="${new Date()}" noSelection="['':'-Choose-']"/></td>
-          <td><g:datePicker name="endDate" id="event-end" value="${new Date()}" noSelection="['':'-Choose-']"/></td>
-          <td><g:actionSubmit value="Add Event" action="save"/></td>
-        </tr>
-        </g:form>
+		<g:render template="/event/form" />
       </tbody>
     </table>
   </body>

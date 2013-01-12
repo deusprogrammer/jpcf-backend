@@ -14,7 +14,6 @@ class FileUploadController {
         
         def f = request.getFile('podcastUpload')
         if(!f.empty) {
-            //def image = new SlideShowImage(orderIndex: SlideShowImageService.getNextOrderIndex())
             podcast = new Podcast()
             
             def filename = f.getOriginalFilename()
@@ -25,6 +24,8 @@ class FileUploadController {
             def path = grailsApplication.config.podcasts.location.toString() + "/podcast" + podcast.id + extension
 
             podcast.fileName = path
+			podcast.name = params.name
+			podcast.description = params.description
             podcast.save()
             
             println "FILE: " + path
@@ -38,7 +39,7 @@ class FileUploadController {
             return
         }
         
-        redirect(controller: "podcast", action: "edit", id: podcast.id)
+        redirect(controller: "configuration", action: "index")
     }
 
     def uploadImage = {

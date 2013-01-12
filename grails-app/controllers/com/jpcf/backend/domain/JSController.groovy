@@ -3,16 +3,22 @@ package com.jpcf.backend.domain
 import grails.converters.JSON
 
 class JSController {
-    def listEventsJs() {
-        render Event.list() as JSON
+    def listEvents() {
+        withFormat {
+            json {render Event.list() as JSON}
+            js   {render "${params.callback}(${Event.list() as JSON})"}
+        }
     }
     
-    def listPodcastsJs(Integer max) {
+    def listPodcasts(Integer max) {
         def list = Podcast.list().collect {[url: createLink(action: "getPodcastJs", id: it.id), name: it.name, description: it.description]}
         
         println "LIST: ${list}"
         
-        render list as JSON
+        withFormat {
+            json {render list as JSON}
+            js   {render "${params.callback}(${list as JSON})"}
+        }
     }
 
     def getPodcastJs(Long id) {
@@ -31,11 +37,14 @@ class JSController {
         }
     }    
     
-    def listImagesJs() {
-        render SlideShowImage.list() as JSON
+    def listImages() {
+        withFormat {
+            json {render SlideShowImage.list() as JSON}
+            js   {render "${params.callback}(${SlideShowImage.list() as JSON})"}
+        }
     }
     
-    def listImageUrlsJs() {
+    def listImageUrls() {
         def urls = []
         SlideShowImage.list().each {image ->
             urls += createLink(action: "getImageJs", id: image.id)
@@ -43,7 +52,10 @@ class JSController {
         
         println "URLS: ${urls}"
         
-        render urls as JSON
+        withFormat {
+            json {render urls as JSON}
+            js   {render "${params.callback}(${urls as JSON})"}
+        }
     }
     
     def getImageJs(Long id) {

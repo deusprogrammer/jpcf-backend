@@ -19,18 +19,18 @@
 		<r:layoutResources />
 	</head>
 	<body>
-                <% 
-                def user = null
-                if (session["userId"]) {
-                  user = User.get(session["userId"])
-                }
-                %>
-                <g:if test="${user}">
-                  <div style="background-color: #00ccff; color: white;">Logged in as <g:link controller="user" action="show" id="${session["userId"]}" style="text-decoration: none; color: red">${user.username}</g:link> | <g:link controller="user" action ="logout" style="text-decoration: none; color: red;">Logout</g:link>?</div>
-                </g:if>
-                <g:else>
-                  <div style="background-color: #00ccff; color: white">Need to <g:link controller="user" action="promptLogin" style="text-decoration: none; color: red">login</g:link>?  If you don't have a login, you need to request one!</div>
-                </g:else>
+        <% 
+        def user = null
+        if (session["userId"]) {
+          user = User.get(session["userId"])
+        }
+        %>
+        <g:if test="${user}">
+          <div style="background-color: #00ccff; color: white;">Logged in as <g:link controller="user" action="show" id="${session["userId"]}" style="text-decoration: none; color: red">${user.username}</g:link> | <g:link controller="user" action ="logout" style="text-decoration: none; color: red;">Logout</g:link>?</div>
+        </g:if>
+        <g:else>
+          <div style="background-color: #00ccff; color: white">Need to <g:link controller="user" action="promptLogin" style="text-decoration: none; color: red">login</g:link>?  If you don't have a login, you need to request one!</div>
+        </g:else>
 		<div id="grailsLogo" role="banner"><a href="http://grails.org"><img src="${resource(dir: 'images', file: 'grails_logo.png')}" alt="Grails"/></a></div>
 		<g:layoutBody/>
 		<div class="footer" role="contentinfo"></div>

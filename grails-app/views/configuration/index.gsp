@@ -57,6 +57,8 @@
           <th>Image</th>
           <th>Order</th>
           <th></th>
+          <th></th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -65,6 +67,8 @@
             <tr>
               <td><img class="thumbnail" src="${createLink(controller: 'JS', action: 'getImageJs', id: image.id)}" /></td>
               <td>${image.orderIndex}</td>
+              <td></td>
+              <td></td>
               <td>
                 <g:if test="${i != 0}">
                   <button class="move-down-button" data-ImageId="${image.id}">Move Up</button>
@@ -85,8 +89,10 @@
         </g:if>
         <g:form controller="fileUpload" action="uploadImage" method="post" enctype="multipart/form-data">
         <tr class="tr-input">
-          <td></td>
           <td><input type="file" id="fileUpload" name="imageUpload" /></td>
+          <td></td>
+          <td></td>
+          <td></td>
           <td><g:actionSubmit class="upload" value="Upload Image" action="uploadImage" /></td>
         </tr>
         </g:form>
@@ -100,6 +106,7 @@
           <th>Podcast</th>
           <th>Description</th>
           <th>Date</th>
+          <th></th>
           <th></th>
         </tr>
       </thead>
@@ -130,7 +137,7 @@
 			<g:render template="/event/event" model="${[event: event]}" />
           </g:each>
         </g:if>
-		<g:render template="/event/form" />
+		<g:render template="/event/inlineForm" />
       </tbody>
     </table>
   </body>

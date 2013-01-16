@@ -63,14 +63,14 @@ class EventController {
     }
 
     def edit(Long id) {
-        def eventInstance = Event.get(id)
-        if (!eventInstance) {
+        def event = Event.get(id)
+        if (!event) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'event.label', default: 'Event'), id])
             redirect(action: "list")
             return
         }
 
-        [eventInstance: eventInstance]
+        [event: event]
     }
 
     def update(Long id, Long version) {
@@ -90,6 +90,28 @@ class EventController {
                 return
             }
         }
+		
+		SimpleDateFormat formatter = new SimpleDateFormat("M/d/yyyy h:m a")
+		def startDate
+		def endDate
+		
+		try {
+			startDate = formatter.parse(params.startDate)
+			endDate = formatter.parse(params.endDate)
+		} catch (ParseException e) {
+			flash.message = "Start and end date must be in format MM/dd/yyyy H:m(pm|am)!"
+			redirect(controller: "configuration", action: "index")
+			return
+		}
+		
+		if (!startDate || !endDate) {
+			flash.message = "Start and end date must be in format MM/dd/yyyy H:m(pm|am)!"
+			redirect(controller: "configuration", action: "index")
+			return
+		}
+		
+		params.startDate = startDate
+		params.endDate = endDate
 
         eventInstance.properties = params
 

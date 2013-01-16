@@ -25,8 +25,8 @@
 			</ul>
 			</g:hasErrors>
 			<g:form method="post" >
-				<g:hiddenField name="id" value="${eventInstance?.id}" />
-				<g:hiddenField name="version" value="${eventInstance?.version}" />
+				<g:hiddenField name="id" value="${event?.id}" />
+				<g:hiddenField name="version" value="${event?.version}" />
 				<fieldset class="form">
 					<g:render template="form"/>
 				</fieldset>

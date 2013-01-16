@@ -26,23 +26,9 @@ environments {
     production {
         dataSource {
             dbCreate = "update"
-            url = "jdbc:mysql://192.168.1.108/jpcf?useUnicode=yes&characterEncoding=UTF-8"
-            username = "prod"
+            url = "jdbc:mysql://localhost/jpcf?useUnicode=yes&characterEncoding=UTF-8&autoReconnect=true"
+            username = "jpcf_prod"
             password = "sethR4chan"
-            //url = "jdbc:h2:prodDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
-            /*
-            pooled = true
-            properties {
-               maxActive = -1
-               minEvictableIdleTimeMillis=1800000
-               timeBetweenEvictionRunsMillis=1800000
-               numTestsPerEvictionRun=3
-               testOnBorrow=true
-               testWhileIdle=true
-               testOnReturn=true
-               validationQuery="SELECT 1"
-            }
-            */
         }
     }
 }

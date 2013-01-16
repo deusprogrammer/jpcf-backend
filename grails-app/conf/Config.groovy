@@ -75,6 +75,7 @@ log4j = {
     //appenders {
     //    console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
     //}
+    'null' name:'stacktrace'
 
     error  'org.codehaus.groovy.grails.web.servlet',        // controllers
            'org.codehaus.groovy.grails.web.pages',          // GSP
@@ -97,17 +98,3 @@ else {
     images.location = "/tmp/slideShow"
     podcasts.location = "/tmp/podcasts"
 }
-/*
-fileuploader {
-	slideShowImage {
-		maxSize = 1024 * 256 //256 kbytes
-		allowedExtensions = ["jpg","jpeg","gif","png"]
-                if (System.properties['os.name'].toLowerCase().contains('windows')) {
-                    path = "/tmp/slideShow"
-                }
-                else {
-                    path = "c:/tmp/slideShow"
-                }
-	}
-}
-*/

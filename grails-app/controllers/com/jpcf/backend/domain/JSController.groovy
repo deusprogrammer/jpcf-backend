@@ -4,9 +4,12 @@ import grails.converters.JSON
 
 class JSController {
     def listEvents() {
+        def formatter = new java.text.SimpleDateFormat("MM/dd/yyyy hh:mm a")
+        def events = Event.list().collect {[name: it.name, description: it.description, startDate: formatter.format(it.startDate), endDate: formatter.format(it.endDate)]}
+        
         withFormat {
-            json {render Event.list() as JSON}
-            js   {render "${params.callback}(${Event.list() as JSON})"}
+            json {render events as JSON}
+            js   {render "${params.callback}(${events as JSON})"}
         }
     }
     

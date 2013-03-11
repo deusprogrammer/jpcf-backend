@@ -95,6 +95,6 @@ if (System.properties['os.name'].toLowerCase().contains('windows')) {
     podcasts.location = "c:/tmp/podcasts" 
 }
 else {
-    images.location = "/tmp/slideShow"
-    podcasts.location = "/tmp/podcasts"
+    images.location = "/opt/jpcf/slideShow"
+    podcasts.location = "/opt/jpcf/podcasts"
 }

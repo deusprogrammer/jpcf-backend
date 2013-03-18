@@ -56,7 +56,7 @@
         <tr>
           <th>Image</th>
           <th>Order</th>
-          <th></th>
+          <th>Text</th>
           <th></th>
           <th></th>
         </tr>
@@ -67,7 +67,7 @@
             <tr>
               <td><img class="thumbnail" src="${createLink(controller: 'JS', action: 'getImageJs', id: image.id)}" /></td>
               <td>${image.orderIndex}</td>
-              <td></td>
+              <td>${image.text}</td>
               <td></td>
               <td>
                 <g:if test="${i != 0}">
@@ -91,7 +91,7 @@
         <tr class="tr-input">
           <td><input type="file" id="fileUpload" name="imageUpload" /></td>
           <td></td>
-          <td></td>
+          <td><g:textField name="text" id="image-upload-text" /></td>
           <td></td>
           <td><g:actionSubmit class="upload" value="Upload Image" action="uploadImage" /></td>
         </tr>

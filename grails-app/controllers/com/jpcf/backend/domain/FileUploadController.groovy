@@ -57,6 +57,7 @@ class FileUploadController {
             def path = grailsApplication.config.images.location.toString() + "/image" + image.id + extension
 
             image.fileName = path
+			image.text = params.text
             image.save()
             
             println "FILE: " + path

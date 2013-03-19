@@ -82,6 +82,7 @@
                 <g:else>
                   <button class="move-up-button" data-ImageId="${image.id}" disabled>Move Down</button>
                 </g:else>
+                <g:link controller="slideShowImage" action="edit" id="${image.id}"><button class="edit-img-button">Edit</button></g:link>
                 <g:link controller="slideShowImage" action="delete" id="${image.id}"><button class="delete-img-button">Delete</button></g:link>
               </td>
             </tr>

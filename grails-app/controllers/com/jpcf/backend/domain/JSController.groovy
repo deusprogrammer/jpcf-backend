@@ -39,8 +39,8 @@ class JSController {
     
     def listImages() {
         withFormat {
-            json {render SlideShowImage.list() as JSON}
-            js   {render "${params.callback}(${SlideShowImage.list() as JSON})"}
+            json {render SlideShowImage.list().collect {[url: createLink(action: 'getImageJs', id: it.id, absolute: true), text: it.text]} as JSON}
+            js   {render "${params.callback}(${SlideShowImage.list().collect {[url: createLink(action: 'getImageJs', id: it.id, absolute: true), text: it.text]} as JSON})"}
         }
     }
     
@@ -49,8 +49,6 @@ class JSController {
         SlideShowImage.list().each {image ->
             urls += createLink(action: "getImageJs", id: image.id)
         }
-        
-        println "URLS: ${urls}"
         
         withFormat {
             json {render urls as JSON}

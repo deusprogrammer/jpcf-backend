@@ -15,3 +15,9 @@
 	</tr>
 	</tbody>
 </table>
+<g:if test="${event.id}">
+	<div class="textwrapper">
+		<h3>Optional HTML Data</h3>
+		<g:textArea name="htmlData" id="event-data" value="${event?.htmlData}" />
+	</div>
+</g:if>

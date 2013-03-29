@@ -596,3 +596,14 @@ a.skip {
 	position: absolute;
 	left: -9999px;
 }
+
+textarea {
+    width:99%;
+    height:94%;
+}
+.textwrapper {
+	border: 1px solid black;
+    margin:5px 5px;
+    padding:3px;
+    height:500px;
+}

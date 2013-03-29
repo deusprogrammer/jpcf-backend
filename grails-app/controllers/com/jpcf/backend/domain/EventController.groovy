@@ -142,4 +142,16 @@ class EventController {
             redirect(controller: "configuration", action: "index")
         }
     }
+	
+	def getHtml(Long id) {
+		def event = Event.get(id)
+		
+		if (!event) {
+			response.setStatus(404)
+			return
+		}
+		
+		render event.htmlData
+		return
+	}
 }

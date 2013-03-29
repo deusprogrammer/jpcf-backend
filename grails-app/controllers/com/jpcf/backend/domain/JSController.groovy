@@ -5,7 +5,7 @@ import grails.converters.JSON
 class JSController {
     def listEvents() {
         def formatter = new java.text.SimpleDateFormat("MM/dd/yyyy hh:mm a")
-        def events = Event.findAllByStartDateGreaterThan(new Date()).collect {[name: it.name, description: it.description, startDate: formatter.format(it.startDate), endDate: formatter.format(it.endDate)]}
+        def events = Event.findAllByStartDateGreaterThan(new Date()).collect {[name: it.name, description: it.description, startDate: formatter.format(it.startDate), endDate: formatter.format(it.endDate), hasHtml: it.htmlData != null && it.htmlData != "", pageLink: createLink(controller: "event", action: "getHtml", id: it.id, absolute: true)]}
         
         withFormat {
             json {render events as JSON}

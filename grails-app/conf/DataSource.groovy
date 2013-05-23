@@ -29,6 +29,11 @@ environments {
             url = "jdbc:mysql://localhost/jpcf?useUnicode=yes&characterEncoding=UTF-8&autoReconnect=true"
             username = "jpcf_prod"
             password = "sethR4chan"
+			properties {
+				validationQuery="select 1"
+				testWhileIdle=true
+				timeBetweenEvictionRunsMillis=60000
+			}
         }
     }
 }

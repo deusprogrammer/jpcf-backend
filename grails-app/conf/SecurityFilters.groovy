@@ -15,7 +15,17 @@ class SecurityFilters {
                 println "\tCONTROLLER NAME: " + controllerName
                 println "\tACTION NAME:     " + actionName
                 println "\tLOGGED IN USER:  " + session["userId"]
+				
+				//Look for specific actions
+				switch(actionName) {
+					case "getHtml":
+						return true
+					default:
+						//Fall through
+						break
+				}
                 
+				//Look for specific controllers
                 switch(controllerName) {
                     case "JS":
                         return true
